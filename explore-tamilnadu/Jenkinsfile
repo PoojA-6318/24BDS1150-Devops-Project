@@ -8,22 +8,19 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                url: 'https://github.com/PoojA-6318/24BDS1150-Devops-Project.git'
-            }
-        }
-
         stage('Build') {
             steps {
-                bat 'mvn clean package'
+                dir('explore-tamilnadu') {
+                    bat 'mvn clean package'
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t tamilnadu-tourism .'
+                dir('explore-tamilnadu') {
+                    bat 'docker build -t tamilnadu-tourism .'
+                }
             }
         }
 
